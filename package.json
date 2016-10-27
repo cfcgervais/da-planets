@@ -1,10 +1,10 @@
 {
   "name": "da-planets",
   "version": "1.0.0",
-  "description": "",
+  "description": "Da-Planets\r ==========",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js" 
+    "start": "node index.js"
   },
   "engines": {
     "node": "6.3.1",
@@ -25,6 +25,16 @@
     "js-data-sql": "^0.11.17",
     "knex": "^0.11.9",
     "node-uuid": "^1.4.7",
-    "pg": "6.0.3"
-  }
+    "pg": "6.0.3",
+    "socket.io": "^1.5.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cfcgervais/da-planets.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cfcgervais/da-planets/issues"
+  },
+  "homepage": "https://github.com/cfcgervais/da-planets#readme"
 }

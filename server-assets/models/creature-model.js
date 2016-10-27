@@ -10,10 +10,20 @@ let Creature = DS.defineResource({
   filepath: __dirname + '/../data/creatures.db',
   relations: {
     hasMany: {
-      galaxy: {
+      galaxy: [{
         localField: 'galaxies',
         localKeys: 'galaxyIds'
-      }
+      },{
+        localField: 'knownGalaxies',
+        foreignKeys: 'creatureIds'
+      }],
+      planet: [{
+        localField: 'planets',
+        localKeys: 'planetIds'
+      },{
+        localField: 'knownPlanets',
+        foreignKeys: 'creatureIds'
+      }]
     }
   }
 })
@@ -24,10 +34,9 @@ function create(creature, cb) {
   let creatureObj = {
     id: uuid.v4(),
     name: creature.name,
-    galaxyIds: {
+    planetIds: {
     }
   }
-
   Creature.create(creatureObj).then(cb).catch(cb)
 }
 
@@ -35,22 +44,33 @@ function create(creature, cb) {
 function inhabitGalaxy(creatureId, galaxyId, cb){
   DS.find('galaxy', galaxyId).then(function(galaxy){
     Creature.find(creatureId).then(function(creature){
-
       creature.galaxyIds[galaxyId] = galaxyId;
       galaxy.creatureIds = galaxy.creatureIds || {}
       galaxy.creatureIds[creatureId] = creatureId;
-
       Creature.update(creature.id, creature).then(function(){
         DS.update('galaxy', galaxy.id, galaxy)
           .then(cb)
           .catch(cb)
       }).catch(cb)
-
-
     }).catch(cb)
   }).catch(cb)
 }
 
+function inhabitPlanet(creatureId, planetId, cb){
+  DS.find('planet', planetId).then(function(planet){
+    Creature.find(creatureId).then(function(creature){
+      creature.planetIds = creature.planetIds || {}
+      creature.planetIds[planetId] = planetId;
+      planet.creatureIds = planet.creatureIds || {}
+      planet.creatureIds[creatureId] = creatureId;
+      Creature.update(creature.id, creature).then(function(){
+        DS.update('planet', planet.id, planet)
+          .then(cb)
+          .catch(cb)
+      }).catch(cb)
+    }).catch(cb)
+  }).catch(cb)
+}
 
 
 function getAll(query, cb) {
@@ -67,6 +87,14 @@ module.exports = {
   create,
   getAll,
   inhabitGalaxy,
+  inhabitPlanet,
   getById
 }
+
+
+
+
+
+
+
 

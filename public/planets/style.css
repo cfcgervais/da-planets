@@ -1,0 +1,9 @@
+.jumbotron{
+    background-image: url(http://img04.deviantart.net/61a3/i/2013/107/c/f/green_space_by_ecvcm-d620con.jpg);
+    background-size: cover;
+    font-family: 'Quicksand', sans-serif ;
+    text-align: center;
+    height: 100vh;
+    color: white;
+    padding-top: 220px
+}

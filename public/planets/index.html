@@ -3,15 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Hairline|Quicksand" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>DA PLANETS WILL BE HERE SOON</h1>
+  <div class="jumbotron">
+    <h1>Da Planets!</h1>
+  </div>
 
   <universe></universe>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 
   <script src="app.js"></script>
-
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    socket.on('update',  function(msg){
+      console.log(msg);
+    })
+  
+      
+  </script>
 </body>
 </html>

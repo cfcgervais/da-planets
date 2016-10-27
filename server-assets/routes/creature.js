@@ -25,10 +25,17 @@ router.route('/:id?')
     })
   })
   .put(function (req, res, next) {
+   if(req.body.galaxyId){
     Creature.inhabitGalaxy(req.params.id, req.body.galaxyId, function(creature){
       if(creature.stack) { return next(creature) }
       return res.send(creature)
     })
+  }else if(req.body.planetId){
+    Creature.inhabitPlanet(req.params.id, req.body.planetId, function(creature){
+      if(creature.stack) { return next(creature) }
+      return res.send(creature)
+    })
+  }
   })
   .delete(function (req, res, next) {
     res.send('We are working on it....')
